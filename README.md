@@ -306,7 +306,7 @@ cyber-threat-detection/
 Clone the repository:
 
 ```bash
-git clone https://github.com/Arnimach/cyber-threat-detection
+git clone https://github.com/Arnimach/cyber-threat-detection  cyber-threat-detection
 cd cyber-threat-detection
 ```
 
