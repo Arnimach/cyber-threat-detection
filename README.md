@@ -352,7 +352,7 @@ python src/validate_processed_data.py
 After preparing the datasets, train the Random Forest model:
 
 ```bash
-python src/train.py
+python -m src.train
 ```
 
 The trained model and associated parameters are logged to MLflow.
