@@ -58,7 +58,7 @@ def audit_file(file):
 
 def main():
 
-    csv_files = DATA_DIR.glob("*.csv")
+    csv_files = list(DATA_DIR.glob("*.csv"))
 
     print(f"Found {len(csv_files)} CSV files.\n")
 
