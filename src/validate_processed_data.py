@@ -11,8 +11,8 @@ DATA_DIR = Path("data/processed")
 
 SPLITS = {
     "train": DATA_DIR / "train",
-    "validation": DATA_DIR / "validation",
-    "test": DATA_DIR / "test",
+    "validation": DATA_DIR / "validation_rev",
+    "test": DATA_DIR / "test_rev",
 }
 
 CHUNK_SIZE = 100_000
