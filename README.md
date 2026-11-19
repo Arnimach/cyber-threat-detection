@@ -357,9 +357,25 @@ python -m src.train
 
 The trained model and associated parameters are logged to MLflow.
 
+
+
 ## Run the Application
 
-Build and start the Docker Compose services:
+### Docker Volume Configuration
+
+Before starting the Docker services, update the MLflow volume mounts in docker-compose.yml.
+
+The MLflow database and artifacts must be accessible from both the FastAPI and Kafka consumer containers.
+
+volumes:
+  - ./mlflow.db:/app/mlflow.db
+  - ./mlruns:/YOUR_MLFLOW_ARTIFACT_PATH
+
+Replace /YOUR_MLFLOW_ARTIFACT_PATH with the absolute path to the mlruns directory on your local machine.
+
+Important: Use the same artifact mount destination in both the FastAPI and consumer services. It must match the artifact location recorded in your local MLflow experiment.
+
+After configuring the volume mounts, build and start the Docker Compose services:
 
 ```bash
 docker compose up --build -d
