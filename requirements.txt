@@ -4,3 +4,4 @@ uvicorn[standard]
 pandas==2.3.2
 mlflow==3.17.2
 scikit-learn==1.7.1
+ipython
