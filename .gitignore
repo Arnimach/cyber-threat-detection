@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+*.egg-info/
+venv/
+tf_env/
+
+# IDE
+.idea/
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/
+
+# MLflow
+mlflow.db
+mlruns/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
