@@ -41,9 +41,39 @@ FastAPI provides an additional HTTP interface for direct model inference.
 
 ## Dataset
 
-The project uses the CICIDS2017 dataset, which contains labeled network traffic records collected over seven days. The dataset includes benign traffic and multiple categories of network attacks.
+This project uses the [CICIDS2017 dataset](https://www.unb.ca/cic/datasets/ids-2017.html), which contains labeled network traffic records collected over five days, including benign traffic and multiple categories of network attacks.
 
-The original daily CSV files are stored under `data/raw/cicids2017/`.
+### Download and Setup
+
+1. Download the original CICIDS2017 dataset from the [Canadian Institute for Cybersecurity](https://www.unb.ca/cic/datasets/ids-2017.html).
+2. Extract the downloaded files.
+3. Place the original daily CSV files in the following directory:
+
+```text
+data/
+└── raw/
+    └── cicids2017/
+        ├── Monday-WorkingHours.pcap_ISCX.csv
+        ├── Tuesday-WorkingHours.pcap_ISCX.csv
+        ├── ...
+        └── Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv
+```
+
+4. Run the data ingestion and preprocessing scripts to validate, clean, and split the raw data into training, validation, and test datasets.
+
+The processed directories are generated automatically by the ingestion and preprocessing pipeline:
+
+```text
+data/
+├── raw/
+│   └── cicids2017/
+└── processed/
+    ├── train/
+    ├── validation_rev/
+    └── test_rev/
+```
+
+**Note:** The raw and processed datasets are not included in this repository. They are generated locally after downloading the original dataset and running the pipeline.
 
 ## Data Engineering: Ingestion, Preprocessing & Validation
 
@@ -81,9 +111,17 @@ Implemented an initial ingestion pipeline using pandas chunk processing.
 
 ### 4. Revised Dataset Splitting (`ingest_data_revised_split.py`)
 
-It was found after initial model validation that the chronological split resulted in a very low attack rate in the validation dataset. To address this, the dataset split was revised to obtain a more representative validation dataset for model selection and decision-threshold tuning.
+During initial model validation, the chronological split resulted in a very low attack representation in the validation dataset, making it less suitable for model selection and decision-threshold tuning.
 
-The revised split was used for subsequent model development and evaluation.
+To address this, the dataset splitting strategy was revised to create a more representative validation dataset while retaining a separate test dataset for final evaluation.
+
+The revised split was:
+
+- **Training data:** Monday, Tuesday, and Wednesday traffic.
+- **Validation data:** Thursday Web Attacks, Thursday Infiltration, and Friday Morning traffic.
+- **Test data:** Friday Afternoon DDoS and PortScan traffic only.
+
+The revised split was used for subsequent model development, model selection, and decision-threshold tuning. The test dataset was held out for final model evaluation.
 
 ### 5.  Processed Data Validation (`validate_processed_data.py`)
 
