@@ -373,8 +373,7 @@ volumes:
 
 Replace /YOUR_MLFLOW_ARTIFACT_PATH with the absolute path to the mlruns directory on your local machine.
 
-Important: Use the same artifact mount destination in both the FastAPI and consumer services. It must match the artifact location recorded in your local MLflow experiment.
-
+Important: Use the same artifact mount destination in both the FastAPI and consumer services. The container destination must match the artifact location recorded in your local MLflow experiment.
 After configuring the volume mounts, build and start the Docker Compose services:
 
 ```bash
